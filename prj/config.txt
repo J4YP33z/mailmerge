@@ -1,0 +1,25 @@
+[CONFIG]
+rawData = 1522795723811988168.csv
+lastNameProcessed = NG EE XIANG
+lastCountryProcessed = MALAYsia
+excludedProducts = ["Closing Strategy Blueprint Video (Usual Price US$297)", "The Future Advisor System (CP)", "60 Minutes Coaching Video (Dr Sanjay Tolani)"]
+bookCode = OCP
+startingNumber = 55
+
+# hashes indicate the start of an IGNORED line
+
+# Excluded products 
+## CP
+### ["Closing Strategy Blueprint Video (Usual Price US$297)", "The Future Advisor System (CP)", "60 Minutes Coaching Video (Dr Sanjay Tolani)"]
+## PM
+### ["4H Coaching Video (Usual Price: US$297)", "The Future Advisor System", "60 Mins of Sanjay Coaching"]
+
+# Last Processed Names /  Countries
+## CP
+### CATHERINE A ORTIZ, Philippines
+## PM
+### Jervis Jong Fu Kai, mAlAysIa
+
+# Book Codes
+## CP
+### OCP 55
