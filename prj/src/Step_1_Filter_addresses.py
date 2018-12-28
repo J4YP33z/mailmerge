@@ -266,7 +266,7 @@ countries = {
 # config variables
 pardir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
 config = configparser.ConfigParser()
-config.read(pardir + "\config.txt")
+config.read(pardir + "\Step_1_config.txt")
 fileSrc = pardir + "\\" + (config["CONFIG"]["RawData"]).strip()
 lastNameProcessed = (config["CONFIG"]["lastNameProcessed"]).strip()
 lastCountryProcessed = (config["CONFIG"]["lastCountryProcessed"]).strip()
@@ -275,6 +275,7 @@ bookCode = (config["CONFIG"]["bookCode"]).strip()
 startingNumber = int((config["CONFIG"]["startingNumber"]).strip())
 
 
+# read csv file from ClickFunnels
 rawData = []
 with open(fileSrc, newline="", encoding="utf-8") as csvfile:
     reader = csv.reader(csvfile, delimiter=",")
@@ -314,7 +315,12 @@ DHL_WS = DHL_WB.add_worksheet()
 # file name of csv and last processed name goes here
 outFile = open(pardir + "\\zz_lastNameProcessed.txt", "w")
 tmpStr = (
-    (config["CONFIG"]["RawData"]).strip() + " " + rawData[-1][0] + " " + rawData[-1][15]
+    "rawData = "
+    + (config["CONFIG"]["RawData"]).strip()
+    + "\nlastNameProcessed = "
+    + rawData[-1][0]
+    + "\nlastCountryProcessed = "
+    + rawData[-1][15]
 )
 outFile.write(tmpStr)
 
@@ -334,7 +340,7 @@ while True:
         totalCount += addresses.count(address)
         lastIndex = ""
         firstIndex = ""
-        if addresses.count(address) != 1:  # handle duplicates
+        if addresses.count(address) != 1:  # each address should only exist once in list
             for i, col in enumerate(rawData[0:]):
                 if col[11] == address:
                     firstIndex = i
@@ -470,14 +476,12 @@ for col in rawData[0:]:
         # RM10 per book, max RM50
         declaredValue = min(quantityTotal * 10, 50)
 
-        # name is MAX 30 CHARS
-
         for k, content in enumerate(
             [
                 "5345221",
                 shipmentOrderID,
                 shippingServiceCode,
-                col[0][:30],
+                col[0][:30],  # name is MAX 30 CHARS
                 col[11],
                 "",
                 "",

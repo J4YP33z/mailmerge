@@ -1,0 +1,6 @@
+[CONFIG]
+filesToProcess = ["zz_sg.xlsx", "zz_my.xlsx"]
+columns = 2
+rows = 5
+label_width = 99.1
+label_height = 57
