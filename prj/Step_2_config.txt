@@ -1,5 +1,5 @@
 [CONFIG]
-filesToProcess = ["zz_sg.xlsx", "zz_my.xlsx"]
+filesToProcess = ["zz_sg_labels.xlsx", "zz_my_labels.xlsx"]
 columns = 2
 rows = 5
 label_width = 99.1

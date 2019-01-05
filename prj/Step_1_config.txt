@@ -1,32 +1,36 @@
-[CONFIG]
-rawData = cp.csv
-lastNameProcessed = Darren Lim
-lastCountryProcessed = Singapore
-excludedProducts = ["Closing Strategy Blueprint Video (Usual Price US$297)", "The Future Advisor System (CP)", "60 Minutes Coaching Video (Dr Sanjay Tolani)"]
-bookCode = OCP
-startingNumber = 140
+[CP]
+url = https://app.clickfunnels.com/funnels/6071976/contact_purchases
+excludedproducts = ["Closing Strategy Blueprint Video (Usual Price US$297)", "The Future Advisor System (CP)", "60 Minutes Coaching Video (Dr Sanjay Tolani)"]
+bookcode = OCP
+startingnumber = 23
+lastnameprocessed = Lim Chuan Kai Tommy
+lastcountryprocessed = singapore
 
-# hashes indicate the start of an IGNORED line
+[OP]
+url = https://app.clickfunnels.com/funnels/5112316/contact_purchases
+excludedproducts = ["The Objection Playbook Membership", "60 Mins of Sanjay Coaching"]
+bookcode = XXX
+startingnumber = 76
+lastnameprocessed = Caline Chua
+lastcountryprocessed = Singapore
 
-# Excluded products 
-## CP
-### ["Closing Strategy Blueprint Video (Usual Price US$297)", "The Future Advisor System (CP)", "60 Minutes Coaching Video (Dr Sanjay Tolani)"]
-## PM
-### ["4H Coaching Video (Usual Price: US$297)", "The Future Advisor System", "60 Mins of Sanjay Coaching"]
-## 28000
-### ["4H Coaching Video (Usual Price: US$297)", "The Objection Playbook Membership ( 28 000)", "60 Mins of Sanjay Coaching"]
-## OP
-### ["The Objection Playbook Membership", "60 Mins of Sanjay Coaching"]
+[Additional countries]
+bonaire, sint eustatius and saba = BQ
+bolivia, plurinational state of = BO
+congo, the democratic republic of the = CD
+cabo verde = CV
+czechia = CZ
+micronesia, federated states of = FM
+iran, islamic republic of = IR
+libya = LY
+moldova, republic of = MD
+macedonia, republic of = MK
+korea, democratic people's republic of = KP
+palestine, state of = PS
+saint helena, ascension and tristan da cunha = SH
+tanzania, united republic of = TZ
+venezuela, bolivarian republic of = VE
+vietnam = VN
+virgin islands, british = VG
+virgin islands, u.s. = VI
 
-# Last Processed Names /  Countries
-## CP
-### CATHERINE A ORTIZ, Philippines
-## PM
-### Jervis Jong Fu Kai, mAlAysIa
-#
-
-# Book Codes
-## CP
-### OCP 55
-## PM
-### 
