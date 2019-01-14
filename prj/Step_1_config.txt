@@ -2,16 +2,40 @@
 url = https://app.clickfunnels.com/funnels/6071976/contact_purchases
 excludedproducts = ["Closing Strategy Blueprint Video (Usual Price US$297)", "The Future Advisor System (CP)", "60 Minutes Coaching Video (Dr Sanjay Tolani)"]
 bookcode = OCP
-startingnumber = 23
-lastnameprocessed = Lim Chuan Kai Tommy
-lastcountryprocessed = singapore
+startingnumber = 87
+lastnameprocessed = Angela foo
+lastcountryprocessed = Malaysia
 
 [OP]
 url = https://app.clickfunnels.com/funnels/5112316/contact_purchases
 excludedproducts = ["The Objection Playbook Membership", "60 Mins of Sanjay Coaching"]
 bookcode = XXX
-startingnumber = 76
-lastnameprocessed = Caline Chua
+startingnumber = 108
+lastnameprocessed = Paul J Burns
+lastcountryprocessed = New Zealand
+
+[28000]
+url = https://app.clickfunnels.com/funnels/5494741/contact_purchases
+excludedproducts = ["4H Coaching Video (Usual Price: US$297)", "The Objection Playbook Membership ( 28 000)", "60 Mins of Sanjay Coaching"]
+bookcode = XfX
+startingnumber = 134
+lastnameprocessed = Amit Kumar Mishra
+lastcountryprocessed = United Arab Emirates
+
+[PM1]
+url = https://app.clickfunnels.com/funnels/5552564/contact_purchases
+excludedproducts = ["4H Coaching Video (Usual Price: US$297)", "The Future Advisor System", "60 Mins of Sanjay Coaching"]
+bookcode = XrX
+startingnumber = 144
+lastnameprocessed = Ezen candy Tan
+lastcountryprocessed = Singapore
+
+[PM2]
+url = https://app.clickfunnels.com/funnels/6165155/contact_purchases
+excludedproducts = ["The Future Advisor System [Blue PM]", "The Future Advisor System [Blue PM]", "60 Mins of Sanjay Coaching [Blue PM]"]
+bookcode = XXo
+startingnumber = 105
+lastnameprocessed = Neo Wei Xiang
 lastcountryprocessed = Singapore
 
 [Additional countries]
@@ -33,4 +57,5 @@ venezuela, bolivarian republic of = VE
 vietnam = VN
 virgin islands, british = VG
 virgin islands, u.s. = VI
+serbia and montenegro = CS
 

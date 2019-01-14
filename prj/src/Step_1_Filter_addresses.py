@@ -94,7 +94,7 @@ for funnel in funnels:
     lastRecordedIndex = 0
     for i, col in enumerate(rawData[0:]):
         if (
-            lastNameProcessed.upper() == col[0].upper()
+            lastNameProcessed.upper() == col[0].strip().upper()
             and lastCountryProcessed.upper() == col[15].upper()
         ):
             lastRecordedIndex = i
@@ -106,7 +106,7 @@ for funnel in funnels:
         continue
 
     # save processed name into config
-    config[funnel]["lastNameProcessed"] = rawData[-1][0]
+    config[funnel]["lastNameProcessed"] = rawData[-1][0].strip()
     config[funnel]["lastCountryProcessed"] = rawData[-1][15]
 
     # remove unnecessary products
@@ -254,7 +254,7 @@ for funnel in funnels:
             countryCode = countryCodes.get(col[8].upper())
             if countryCode is None:
                 print(
-                    "Country code not found for: ", col[8].upper()
+                    "Country code not found for:", col[8].upper()
                 )  # dbg add file name and row here
 
             if countryCode in ["SG", "TH", "AU", "GB"]:
