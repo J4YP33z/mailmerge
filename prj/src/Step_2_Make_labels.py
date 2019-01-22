@@ -41,7 +41,7 @@ def writeLabelInfo(label, width, height, info):
     label.add(s)
 
     # country poscode
-    tmpStr = info[4] + " " + info[5]
+    tmpStr = str(info[4]) + " " + str(info[5])
     y -= verticalSpacing
     s = shapes.String(x, y, tmpStr, fontName="Times-Roman", fontSize=font_size)
     label.add(s)
