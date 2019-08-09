@@ -17,18 +17,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 # import xlrd
 
 
-options = webdriver.ChromeOptions()
-options.add_argument("headless")
-options.add_argument("log-level=3")
-browser = webdriver.Chrome(os.getcwd() + "\chromedriver.exe", chrome_options=options)
-print("Logging in to CF...")
-browser.get("https://app.clickfunnels.com/users/sign_out")  # sign out first
-browser.get("https://app.clickfunnels.com/users/sign_in")  # sign in
-userNameField = browser.find_element_by_id("user_email")
-userNameField.send_keys("***REMOVED***")
-pwField = browser.find_element_by_id("user_password")
-pwField.send_keys("***REMOVED***")
-pwField.send_keys(Keys.ENTER)
+# options = webdriver.ChromeOptions()
+# options.add_argument("headless")
+# options.add_argument("log-level=3")
+# browser = webdriver.Chrome(os.getcwd() + "\chromedriver.exe", chrome_options=options)
+# print("Logging in to CF...")
+# browser.get("https://app.clickfunnels.com/users/sign_out")  # sign out first
+# browser.get("https://app.clickfunnels.com/users/sign_in")  # sign in
+# userNameField = browser.find_element_by_id("user_email")
+# userNameField.send_keys("***REMOVED***")
+# pwField = browser.find_element_by_id("user_password")
+# pwField.send_keys("***REMOVED***")
+# pwField.send_keys(Keys.ENTER)
 
 
 # config variables
@@ -57,29 +57,29 @@ MY_LABELS_index = 0
 funnels = config.sections()
 funnels.remove("Additional countries")
 for funnel in funnels:
-    URL = config[funnel]["URL"]
+    # URL = config[funnel]["URL"]
     excludedProducts = json.loads(config[funnel]["excludedProducts"])
     bookCode = config[funnel]["bookCode"]
     startingNumber = int(config[funnel]["startingNumber"])
     lastNameProcessed = config[funnel]["lastNameProcessed"]
     lastCountryProcessed = config[funnel]["lastCountryProcessed"]
 
-    print("Generating sales list for " + funnel + "...")
-    browser.get(URL)
-    elem = browser.find_element_by_xpath("//a[@class='btn btn-default export-link']")
-    elem.click()  # generate sales list
+    # print("Generating sales list for " + funnel + "...")
+    # browser.get(URL)
+    # elem = browser.find_element_by_xpath("//a[@class='btn btn-default export-link']")
+    # elem.click()  # generate sales list
 
-    print("Downloading sales list for " + funnel + "...")
-    wait = WebDriverWait(browser, 120)  # wait for CF to provide download link
-    elem = wait.until(
-        EC.element_to_be_clickable(
-            (By.XPATH, "//a[@class='btn btn-primary' and text() = 'Download']")
-        )
-    )
-    r = requests.get(elem.get_attribute("href"), allow_redirects=True)
+    # print("Downloading sales list for " + funnel + "...")
+    # wait = WebDriverWait(browser, 600)  # wait for CF to provide download link
+    # elem = wait.until(
+    #     EC.element_to_be_clickable(
+    #         (By.XPATH, "//a[@class='btn btn-primary' and text() = 'Download']")
+    #     )
+    # )
+    # r = requests.get(elem.get_attribute("href"), allow_redirects=True)
     fileName = "\\" + funnel + "_sales.csv"
-    open(pardir + fileName, "wb").write(r.content)
-    print("Download complete!")
+    # open(pardir + fileName, "wb").write(r.content)
+    # print("Download complete!")
 
     fileSrc = pardir + fileName
 
@@ -242,6 +242,8 @@ for funnel in funnels:
             commas = [m.start() for m in re.finditer(",", tmpOrders)]
             Xs = [m.start() for m in re.finditer(" X ", tmpOrders)]
             for startQuantity, endQuantity in zip(commas, Xs):
+                # tmpstrr = tmpOrders[startQuantity + 1 : endQuantity]
+                # print(tmpstrr)
                 quantityTotal += int(tmpOrders[startQuantity + 1 : endQuantity])
 
             quantity28000 = 0
