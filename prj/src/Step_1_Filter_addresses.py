@@ -6,13 +6,15 @@ import re
 import sys
 
 import pycountry
-import requests
+
+# import requests
 import xlsxwriter
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
+
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.support.ui import WebDriverWait
 
 # import xlrd
 
@@ -52,7 +54,6 @@ SG_LABELS_WS = SG_LABELS_WB.add_worksheet()
 MY_LABELS_WS = MY_LABELS_WB.add_worksheet()
 SG_LABELS_index = 0
 MY_LABELS_index = 0
-
 
 funnels = config.sections()
 funnels.remove("Additional countries")
@@ -217,17 +218,19 @@ for funnel in funnels:
     # output by country
     for col in rawData[0:]:
         shipmentOrderID = ""
-        if col[15] == "Singapore":
+        if col[15].lower() == "singapore" or col[15].lower() == "sg":
             indexOut = SGindex
             SGindex += 1
             SG_LABELS_index += 1
             wsOut = SG_WS
-        elif col[15] in ["Malaysia", "Hong Kong", "Canada", "Iran"]:
+        elif (col[15].lower() in ["malaysia", "hong kong", "canada", "iran"]) or (
+            col[15].lower() in ["my", "hk", "ca", "ir"]
+        ):
             indexOut = MYindex
             MYindex += 1
             MY_LABELS_index += 1
             wsOut = MY_WS
-        elif col[15] == "Philippines":
+        elif col[15].lower() == "philippines" or col[15].lower() == "ph":
             indexOut = PHindex
             PHindex += 1
             wsOut = PH_WS
@@ -253,7 +256,10 @@ for funnel in funnels:
                     startIndex = tmpOrders[:i].rindex(",") + 1
                     quantity28000 += int(tmpOrders[startIndex:i])
 
-            countryCode = countryCodes.get(col[8].upper())
+            if (len(col[8])) == 2:
+                countryCode = col[8].upper()
+            else:
+                countryCode = countryCodes.get(col[8].upper())
             if countryCode is None:
                 print(
                     "Country code not found for:", col[8].upper()
@@ -343,6 +349,8 @@ for funnel in funnels:
     DHL_WB.close()
     print("Output for " + funnel + " complete!")
 
+SG_LABELS_WB.close()
+MY_LABELS_WB.close()
 
 with open(pardir + "\Step_1_config.txt", "w") as configfile:
     config.write(configfile)

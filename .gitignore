@@ -7,3 +7,24 @@ prj/1522795723811988168.csv
 prj/src/build/
 build/
 prj/src/chromedriver.exe
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+tcl/
+Include/
+Scripts/
+License.txt
