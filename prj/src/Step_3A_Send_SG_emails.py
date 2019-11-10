@@ -20,9 +20,13 @@ server.starttls()
 server.login(smtp_user, smtp_pass)
 fromaddr = "***REMOVED***"  # from email address
 
+report = "notifications sent to: \n"
+
+# send notification to customer
 for row_idx in range(1, ws.nrows):
     toaddr = ws.cell_value(row_idx, 1)  # destination email address
     name = ws.cell_value(row_idx, 0)
+    report += name + ", " + toaddr + "\n"
     msg = MIMEMultipart()
     msg["From"] = fromaddr
     msg["To"] = toaddr
@@ -36,7 +40,18 @@ for row_idx in range(1, ws.nrows):
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     print("email sent to", name, "at", toaddr)
-    time.sleep(1)
+    time.sleep(0.2)
+
+# send report to self
+toaddr = "***REMOVED***"
+msg = MIMEMultipart()
+msg["From"] = fromaddr
+msg["To"] = "***REMOVED***"
+msg["Subject"] = "SG parcel notifications sent."  # subject
+msg.attach(MIMEText(report, "plain"))
+text = msg.as_string()
+server.sendmail(fromaddr, toaddr, text)
+print("summary sent to", toaddr)
 
 server.quit()
 
