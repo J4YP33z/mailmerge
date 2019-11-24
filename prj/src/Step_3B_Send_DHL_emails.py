@@ -2,6 +2,8 @@ import os.path
 import smtplib
 import time
 import csv
+import xlrd
+import xlsxwriter
 import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -9,34 +11,43 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
-# parse previously processed records
+# parse previously processed
+wb = xlrd.open_workbook("dhlDatabase.xlsx")
+ws = wb.sheet_by_index(0)
 processedRecords = []
-with open("dhlDatabase.csv", newline="", encoding="utf-8") as csvfile:
-    reader = csv.reader(csvfile, delimiter=",")
-    next(reader, None)  # skip headers
-    for row in reader:
-        processedRecords.append(row[0] + " " + row[1])
-
-print(processedRecords)
+oldData = []
+for row_idx in range(1, ws.nrows):
+    processedRecords.append(
+        ws.cell_value(row_idx, 0) + " " + str(ws.cell_value(row_idx, 1))
+    )
+    oldData.append(
+        [
+            ws.cell_value(row_idx, 0),
+            ws.cell_value(row_idx, 1),
+            ws.cell_value(row_idx, 2),
+        ]
+    )
 
 # parse report from DHL
 startFromDate = datetime.date(2019, 10, 30)  # ignore rows earlier than this
 pardir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
-fileSrc = pardir + "\\dailyReportDHL.csv"
-rawData = []
-with open(fileSrc, newline="", encoding="utf-8") as csvfile:
-    reader = csv.reader(csvfile, delimiter=",")
-    next(reader, None)  # skip headers
-    for row in reader:
-        if (datetime.datetime.strptime(row[3], "%d/%m/%Y").date() > startFromDate) and (
-            (row[0] + " " + row[2]) not in processedRecords
-        ):
-            if row[1] == "":
-                print("No email found for", row[0])
-            else:
-                rawData.append(row)
+fileSrc = pardir + "\\dailyReportDHL.xlsx"
+wb = xlrd.open_workbook(fileSrc)
+ws = wb.sheet_by_index(0)
 
-print(rawData)
+rawData = []
+for row_idx in range(1, ws.nrows):
+    if (
+        datetime.datetime.strptime(ws.cell_value(row_idx, 3), "%d/%m/%Y").date()
+        > startFromDate
+    ) and (
+        (ws.cell_value(row_idx, 0) + " " + ws.cell_value(row_idx, 2))
+        not in processedRecords
+    ):
+        if ws.cell_value(row_idx, 1) == "":
+            print("No email found for", ws.cell_value(row_idx, 0))
+        else:
+            rawData.append(ws.row_values(row_idx))
 
 smtp_user = "***REMOVED***"  # SMTP username used for authentication
 smtp_pass = "***REMOVED***"  # SMTP password used for authentication
@@ -87,7 +98,20 @@ print("summary sent to", toaddr)
 server.quit()
 
 # write processed records to database
-with open("dhlDatabase.csv", mode="a", newline="") as dbDHL:
-    writer = csv.writer(dbDHL, delimiter=",")
-    for row in rawData:
-        writer.writerow([row[0], row[2], datetime.date.today()])
+DB_WB = xlsxwriter.Workbook("dhlDatabase.xlsx")
+DB_WS = DB_WB.add_worksheet()
+DB_WS.write(0, 0, "name")
+DB_WS.write(0, 1, "tracking")
+DB_WS.write(0, 2, "notification date")
+currentRow = 1
+for row in oldData:  # write old data
+    DB_WS.write(currentRow, 0, row[0])
+    DB_WS.write(currentRow, 1, row[1])
+    DB_WS.write(currentRow, 2, row[2])
+    currentRow += 1
+for row in rawData:  # write new data
+    DB_WS.write(currentRow, 0, row[0])
+    DB_WS.write(currentRow, 1, row[2])
+    DB_WS.write(currentRow, 2, datetime.datetime.today().strftime("%d/%m/%Y"))
+    currentRow += 1
+DB_WB.close()

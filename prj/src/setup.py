@@ -8,6 +8,7 @@ setup(
     executables=[
         Executable("Step_1_Filter_addresses.py"),
         Executable("Step_2_Make_labels.py"),
-        Executable("Step_3_Send_emails.py"),
+        Executable("Step_3A_Send_SG_emails.py"),
+        Executable("Step_3B_Send_DHL_emails.py"),
     ],
 )
